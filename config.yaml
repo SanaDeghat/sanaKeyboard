@@ -39,9 +39,10 @@ points:
 outlines:
   left:
     - where: true
+      bound: true
       what: rectangle
       size: [cx + 2, cy + 2]
-      fillet: 2
+      fillet: 3
 pcbs:
   left:
     outlines:
@@ -49,17 +50,42 @@ pcbs:
         outline: left
     footprints:
       keyswitches:
-        where: /matrix/
+        where: true
         what: choc
         params:
           hotswap: true
-          from: "{{column_net}}"
+          from: "{{column_net}}" 
+          to: "{{colrow}}"
+      diodes:
+        where: true
+        what: diode
+        params:
+          from: "{{colrow}}"
           to: "{{row_net}}"
-
       nice_nano:
         what: nice_nano
         params:
           orientation: up
         where:
-          ref: matrix_inner_home
+          ref: matrix_inner_mod
           shift: [-9, -2]
+      battery_jack:
+        what: jstph
+        params:
+          pos: 'RAW'   
+          neg: "GND"       # <-- FIX: Added the required 'pos' string parameter
+        where:
+          ref: matrix_inner_top
+          shift: [12, 0]
+
+
+      # Power Switch on the right edge (below the battery)
+      power_switch:
+        what: slider
+        params:
+          from: RAW         # Connects to the battery's positive terminal
+          to: RAW           # Connects to the Nice!Nano's RAW pin
+        where:
+          ref: matrix_inner_home
+          shift: [12, 0]
+          rotate: -90
