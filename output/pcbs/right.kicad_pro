@@ -266,7 +266,7 @@
       "gencad": "",
       "idf": "",
       "netlist": "",
-      "plot": "right-gerber",
+      "plot": "right-gerber-final",
       "pos_files": "",
       "specctra_dsn": "",
       "step": "",
